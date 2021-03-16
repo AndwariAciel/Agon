@@ -8,13 +8,16 @@
     <artifactId>agon</artifactId>
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
+    <name>Agon - Tournament Organizer</name>
+
     <modules>
-        <module>app</module>
+        <module>agon-app</module>
         <module>agon-business</module>
         <module>agon-core</module>
     </modules>
 
     <properties>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.4.31</kotlin.version>
         <javafx.version>15.0.1</javafx.version>
