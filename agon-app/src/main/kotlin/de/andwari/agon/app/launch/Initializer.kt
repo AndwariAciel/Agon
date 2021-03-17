@@ -22,7 +22,6 @@ class Initializer() {
         loader.location = javaClass.classLoader.getResource(MAIN)
         val parent = loader.load<Parent>()
         stage.scene = Scene(parent)
-
         stage.show()
         stage.isMaximized = true
     }

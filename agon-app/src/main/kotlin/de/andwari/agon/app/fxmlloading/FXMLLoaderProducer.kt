@@ -14,7 +14,9 @@ class FXMLLoaderProducer {
     @Produces
     fun getFXMLLoader(): FXMLLoader {
         val fxmlLoader = FXMLLoader()
-        fxmlLoader.controllerFactory = Callback { p -> instance.select(p).get() }
+        fxmlLoader.controllerFactory = Callback {
+                p -> instance.select(p).get()
+        }
         return fxmlLoader
     }
 }

@@ -1,19 +1,23 @@
 package de.andwari.agon.app.fxmlloading
 
+import de.andwari.agon.business.service.PropertyService
 import jakarta.enterprise.inject.Instance
 import jakarta.inject.Inject
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
-import java.net.URL
+import java.util.*
 
-open class FxmlLoader {
+class FxmlLoader {
+
+    @Inject
+    lateinit var propertyService: PropertyService
 
     @Inject
     private lateinit var loaderInstance: Instance<FXMLLoader>
 
-    open fun loadInThisPage(
+    fun loadInThisPage(
         resource: String,
         sourceController: FxmlController,
         stage: Stage,
@@ -24,15 +28,18 @@ open class FxmlLoader {
         return controller
     }
 
-    open fun loadInNewPage(
+    fun loadInNewPage(
         resource: String,
-        sourceController: FxmlController,
+        sourceController: FxmlController?,
         data: Array<Any>?
     ): FxmlController {
-        return loadInThisPage(resource, sourceController, Stage(), data)
+        val stage = Stage()
+        val controller = load(resource, sourceController, stage, data)
+        stage.show()
+        return controller
     }
 
-    open fun loadInNewPageAndWait(
+    fun loadInNewPageAndWait(
         resource: String,
         sourceController: FxmlController,
         data: Array<Any>?
@@ -45,17 +52,23 @@ open class FxmlLoader {
 
     private fun load(
         resource: String,
-        sourceController: FxmlController,
+        sourceController: FxmlController?,
         stage: Stage,
         data: Array<Any>?
     ): FxmlController {
         var loader = loaderInstance.get()
+        loader.resources = ResourceBundle.getBundle("lang.lang", propertyService.getLanguage())
         loader.location = javaClass.classLoader.getResource(resource)
         val parent = loader.load<Parent>()
         stage.scene = Scene(parent)
 
         val controller = loader.getController<FxmlController>()
-        controller.setup(stage, sourceController, data)
+
+        if(sourceController == null)
+            controller.setup(stage, controller, data)
+        else
+            controller.setup(stage, sourceController, data)
+
         return controller
     }
 
