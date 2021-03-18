@@ -1,29 +1,20 @@
 package de.andwari.agon.app.launch
 
-import de.andwari.agon.app.fxmlloading.MAIN
+import de.andwari.agon.app.fxmlloading.FxmlLoader
 import de.andwari.agon.business.service.PropertyService
 import jakarta.inject.Inject
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.stage.Stage
-import java.util.*
 
 class Initializer() {
 
     @Inject
-    lateinit var loader: FXMLLoader
+    lateinit var loader: FxmlLoader
 
     @Inject
     lateinit var propertyService: PropertyService
 
     fun initialize(stage: Stage) {
-        loader.resources = ResourceBundle.getBundle("lang.lang", propertyService.getLanguage())
-        loader.location = javaClass.classLoader.getResource(MAIN)
-        val parent = loader.load<Parent>()
-        stage.scene = Scene(parent)
-        stage.show()
-        stage.isMaximized = true
+        loader.loadMainPage(stage)
     }
 
 }

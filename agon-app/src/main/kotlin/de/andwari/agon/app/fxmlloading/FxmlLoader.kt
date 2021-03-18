@@ -17,6 +17,12 @@ class FxmlLoader {
     @Inject
     private lateinit var loaderInstance: Instance<FXMLLoader>
 
+    fun loadMainPage(stage: Stage) {
+        load(MAIN, null, stage, emptyArray())
+        stage.show()
+        stage.isMaximized = true
+    }
+
     fun loadInThisPage(
         resource: String,
         sourceController: FxmlController,
@@ -56,7 +62,7 @@ class FxmlLoader {
         stage: Stage,
         data: Array<Any>?
     ): FxmlController {
-        var loader = loaderInstance.get()
+        val loader = loaderInstance.get()
         loader.resources = ResourceBundle.getBundle("lang.lang", propertyService.getLanguage())
         loader.location = javaClass.classLoader.getResource(resource)
         val parent = loader.load<Parent>()
