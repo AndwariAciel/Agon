@@ -24,6 +24,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <weld-se-core.version>4.0.0.Final</weld-se-core.version>
+        <hibernate.version>5.4.29.Final</hibernate.version>
+        <derby.version>10.14.2.0</derby.version>
+        <slf4j.version>1.6.4</slf4j.version>
     </properties>
 
     <dependencies>
@@ -37,6 +40,7 @@
             <artifactId>weld-se-core</artifactId>
             <version>${weld-se-core.version}</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -51,7 +55,25 @@
                 <artifactId>javafx-fxml</artifactId>
                 <version>${javafx.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>${derby.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>
