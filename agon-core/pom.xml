@@ -21,12 +21,39 @@
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
     </dependencies>
+
+    <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
+
+        <configuration>
+            <compilerPlugins>
+                <plugin>all-open</plugin>
+            </compilerPlugins>
+
+            <pluginOptions>
+                <!-- Each annotation is placed on its own line -->
+                <option>all-open:annotation=javax.persistence.Entity</option>
+                <option>all-open:annotation=javax.persistence.MappedSuperclass</option>
+                <option>all-open:annotation=javax.persistence.Embeddable</option>
+            </pluginOptions>
+        </configuration>
+
+        <dependencies>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-allopen</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+        </dependencies>
+    </plugin>
 </project>
