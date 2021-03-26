@@ -1,4 +1,4 @@
-package de.andwari.agon.core.entity
+package de.andwari.agon.core.persistance.entity
 
 import javax.persistence.Column
 import javax.persistence.Entity

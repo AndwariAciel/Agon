@@ -1,4 +1,4 @@
-package de.andwari.agon.core.entity
+package de.andwari.agon.core.persistance.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -15,7 +15,7 @@ abstract class BaseEntity : Serializable {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     var id: Long? = null
 
     @CreationTimestamp
