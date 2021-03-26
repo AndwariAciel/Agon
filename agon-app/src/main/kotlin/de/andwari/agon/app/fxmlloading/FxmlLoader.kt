@@ -20,7 +20,7 @@ class FxmlLoader {
     fun loadMainPage(stage: Stage) {
         load(MAIN, null, stage, emptyArray())
         stage.show()
-        stage.isMaximized = true
+//        stage.isMaximized = true
     }
 
     fun loadInThisPage(
